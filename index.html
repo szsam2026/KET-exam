@@ -65,6 +65,16 @@ h2{margin:8px 0 6px;font-size:21px;font-weight:800}
 .flash-face{position:absolute;inset:0;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
 .flash-front{background:#fff;border:3px solid #F0E9FF;box-shadow:0 7px 0 rgba(155,139,244,.12)}
 .flash-back{background:linear-gradient(150deg,#9B8BF4,#7FD8F7 90%);color:#fff;transform:rotateY(180deg);box-shadow:0 7px 0 rgba(95,79,209,.35)}
+.level-tag{position:absolute;top:14px;right:60px;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.level-tag.core{background:#E0F5F2;color:#0D9488;border:1.5px solid #99F6E4}
+.level-tag.extra{background:#FFEDD5;color:#C2410C;border:1.5px solid #FDBA74}
+.flash-back .level-tag.core{background:rgba(255,255,255,.30);color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.flash-back .level-tag.extra{background:rgba(255,180,120,.35);color:#fff;border:1.5px solid rgba(255,200,150,.65)}
+.pos-line{font-size:14px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:700;letter-spacing:.5px}
+.lv-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.lv-dot.core{background:#14B8A6}
+.lv-dot.extra{background:#F97316}
+.pos-badge{font-size:10px;color:#9CB5B5;font-weight:700;margin-left:4px}
 .flash-tag{position:absolute;top:14px;left:16px;font-size:12px;font-weight:800;background:#F5F1FF;color:#8B7CF0;padding:5px 12px;border-radius:999px;max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .flash-back .flash-tag{background:rgba(255,255,255,.30);color:#fff}
 .flash-stage{position:absolute;top:14px;right:60px;font-size:11px;font-weight:800;background:#FFF6E0;color:#C99012;padding:5px 10px;border-radius:999px}
@@ -294,7 +304,91 @@ var RAW = [
 
 ["抽象与连接词","\uD83D\uDD17","thing|东西  something|某事  anything|任何事  nothing|没有什么  everything|一切  someone|某人  anyone|任何人  everyone|每个人  nobody|没有人  somewhere|某处  anywhere|任何地方  everywhere|到处  idea|主意  reason|原因  way|方式  chance|机会  choice|选择  decision|决定  plan|计划  purpose|目的  result|结果  problem|问题  solution|解决方案  answer|答案  truth|真相  lie|谎言  secret|秘密  story|故事  fact|事实  example|例子  experience|经历  memory|记忆  and|和  but|但是  or|或者  so|所以  because|因为  if|如果  when|当……时  while|当……时  before|在……之前  after|在……之后  although|虽然  however|然而  therefore|因此  also|也  too|也  either|也（否定）  neither|也不  both|两者都  all|全部  some|一些  any|任何  many|许多  much|许多  few|少数  little|少量  several|几个  enough|足够的  more|更多  most|最多  less|更少  least|最少  only|只有  even|甚至  just|只是  still|仍然  already|已经  yet|还  ever|曾经  never|从不  always|总是  usually|通常  often|经常  sometimes|有时  rarely|很少  maybe|也许  perhaps|或许  probably|很可能  certainly|当然  of course|当然  actually|实际上  especially|尤其  finally|最后"]
 ];
+/* ============================================================
+   PET 补充词汇 A-E（共 232 个词，去重后补充）
+   ============================================================ */
+var RAW_EXTRA = [
+["PET 补充 A","\uD83D\uDCDA","a|一（个）  an|一（个）  able|能够的  about|大约；关于  above|在……上面  accommodation|住宿  across|穿过，横过  act|行动；表演  action|行动  activity|活动  ad|广告  add|增加  advanced|高级的  adventure|冒险  advert|广告  advice|建议  aeroplane|飞机  afterwards|后来  again|再次  against|反对；靠着  age|年龄  aged|……岁的  ago|以前  alarm clock|闹钟  album|相册；专辑  allow|允许  all right|好的  alright|好的  almost|几乎  alone|独自的  along|沿着  a.m.|上午  amazed|惊奇的  among|在……之中  anymore|不再  anyway|不管怎样  apartment|公寓  appointment|约会；预约  armchair|扶手椅  around|周围；大约  as|作为；如同  at|在  attractive|有吸引力的  available|可获得的  away|离开"],
 
+["PET 补充 B","\uD83D\uDCDA","bake|烘焙  balcony|阳台  ball|球  balloon|气球  band|乐队  bath|洗澡  be|是  bean|豆  become|变成  beginning|开始  behave|表现  behind|在……后面  bell|铃  belong|属于  below|在……下面  bench|长凳  best|最好的  between|在……之间  bike|自行车  bill|账单  biology|生物学  bit|一点  bite|咬  black|黑色的  blind|瞎的  block|街区  blonde|金发的  blouse|女衬衫  blue|蓝色的  board|板  boil|煮沸  bone|骨头  bookshelf|书架  born|出生的  borrow|借  boss|老板  bother|打扰  bottom|底部  box|盒子  boyfriend|男朋友  bracelet|手镯  brain|大脑  bright|明亮的  brilliant|极好的  brown|棕色的  build|建造  burger|汉堡包  businessman|商人  businesswoman|女商人  by|通过；在……旁边  bye|再见"],
+
+["PET 补充 C","\uD83D\uDCDA","cabinet|橱柜  cafeteria|自助餐厅  calendar|日历  camel|骆驼  campsite|露营地  cap|帽子  card|卡片  carefully|小心地  car park|停车场  case|箱子；情况  CD|光盘  ceiling|天花板  celebrate|庆祝  celebrity|名人  cent|分  centimetre|厘米  cereal|麦片  chain|链条  character|性格；角色  chef|厨师  chemistry|化学  cheque|支票  chilli|辣椒  chips|薯条  circle|圆圈  circus|马戏团  classical|古典的  clear|清楚的  clearly|清楚地  climbing|攀登  closet|壁橱  clown|小丑  coin|硬币  collect|收集  comfortable|舒适的  comic|漫画  common|常见的  compare|比较  complete|完整的；完成  concert|音乐会  condition|条件  consider|考虑  contact|联系  continue|继续  control|控制  conversation|对话  cooker|炊具  copy|复制；副本  correct|正确的；纠正  costume|服装  cottage|小屋  crazy|疯狂的  cream|奶油  create|创造  credit card|信用卡  crime|犯罪  cross|穿过  crowded|拥挤的  cute|可爱的  cycle|骑自行车；循环"],
+
+["PET 补充 D","\uD83D\uDCDA","dad|爸爸  daily|每日的  damage|损害  dancer|舞者  dancing|舞蹈  danger|危险  dark|黑暗的  dead|死的  deaf|聋的  deal|交易  dear|亲爱的  decorate|装饰  decoration|装饰  degree|度；学位  depart|出发  department|部门  department store|百货商店  describe|描述  desert|沙漠  design|设计  details|细节  diary|日记  die|死  difference|差异  different|不同的  dining room|餐厅  dinosaur|恐龙  diploma|文凭  directions|方向  disco|迪斯科  discount|折扣  dish|盘子；菜肴  dive|潜水  diving|潜水的  document|文件  doll|洋娃娃  dollar|美元  donkey|驴  dot|点  double|双倍的  down|向下  downstairs|楼下  drawing|图画  dressed|穿着衣服的  drop|掉落  drugstore|药店  drum|鼓  DVD|数字光盘"],
+
+["PET 补充 E","\uD83D\uDCDA","each|每个  each other|互相  eagle|鹰  earn|赚  earring|耳环  easily|容易地  electric|电动的  elevator|电梯  else|其他  end|结束  engine|发动机  enter|进入  entrance|入口  envelope|信封  equipment|设备  euro|欧元  event|事件  every|每个  everybody|每个人  exactly|确切地  except|除了  excuse|原谅  exhibition|展览  exit|出口  experiment|实验  explore|探索  explorer|探险家  extinct|灭绝的  extra|额外的"]
+];
+
+/* 把补充词汇合并到主词库 */
+RAW = RAW.concat(RAW_EXTRA);
+/* ============================================================
+   PET 补充词汇 F-J（共 127 个词，去重后补充）
+   ============================================================ */
+var RAW_EXTRA_FJ = [
+["PET 补充 F","\uD83D\uDCDA","factory|工厂  fail|失败  fair|公平的  false|错误的  fantastic|极好的  far|远的；远  fat|胖的  favourite|最喜欢的；最爱  festival|节日  fight|打架；战斗  file|文件  final|最后的；决赛  find out|查明  fine|好的  first|第一；首先  fix|修理  flag|旗  flat|公寓  flour|面粉  foggy|有雾的  for|为了；给  foreign|外国的  form|表格；形式  forward|向前  fresh|新鲜的  frighten|使害怕  frightened|害怕的  frog|青蛙  from|从  front|前面；前面的  fun|乐趣；有趣的  furniture|家具"],
+
+["PET 补充 G","\uD83D\uDCDA","garage|车库  gas|气体；汽油  gate|大门  get back|返回  get dressed|穿衣服  get fit|健身  get married|结婚  get off|下车  get on|上车  gift|礼物  giraffe|长颈鹿  girlfriend|女朋友  give back|归还  glasses|眼镜  goat|山羊  golden|金色的  golf|高尔夫  good afternoon|下午好  goodbye|再见  good evening|晚上好  good-looking|好看的  good morning|早上好  good night|晚安  go out|外出  go shopping|去购物  gram|克  grandchild|孙子/孙女  grandad|爷爷  granddaughter|孙女  grandma|奶奶  grandpa|爷爷  grandparent|祖父母  grandson|孙子  granny|奶奶  green|绿色的  grey|灰色的  grilled|烤的  grocery store|杂货店  ground|地面  group|小组  grow up|长大  guess|猜  guest-house|招待所  guidebook|旅行指南  guy|家伙"],
+
+["PET 补充 H","\uD83D\uDCDA","headphones|耳机  headteacher|校长  heating|暖气  helicopter|直升机  hello|你好  her|她的；她  here|这里  hers|她的  herself|她自己  hey|嘿  hi|嗨  him|他  himself|他自己  hip hop|嘻哈  hippo|河马  his|他的  hit|打  hockey|曲棍球  honey|蜂蜜  hoodie|连帽衫  horrible|可怕的  horror|恐怖的  housewife|家庭主妇  how|怎样  huge|巨大的"],
+
+["PET 补充 I","\uD83D\uDCDA","I|我  ice cream|冰淇淋  ice skating|滑冰  ID|身份证明  ID card|身份证  identification|身份证明  immediately|立即  impossible|不可能的  improve|改善  in|在……里面  include|包括  including|包括  indoor|室内的  indoors|在室内  information|信息  in front of|在……前面  ingredient|原料  inside|在里面  instead|代替  instead of|代替  instructions|说明  instrument|乐器；工具  international|国际的"],
+
+["PET 补充 J","\uD83D\uDCDA","jewellery|珠宝  joke|笑话"]
+];
+
+/* 把 F-J 补充词汇合并到主词库 */
+RAW = RAW.concat(RAW_EXTRA_FJ);
+/* ============================================================
+   PET 补充词汇 K-O（共 121 个词，去重后补充）
+   ============================================================ */
+var RAW_EXTRA_KO = [
+["PET 补充 K","\uD83D\uDCDA","kick|踢  kid|小孩  kilogramme|千克  kilometre|千米  king|国王  kiss|吻  kit|成套工具；装备  kite|风筝"],
+
+["PET 补充 L","\uD83D\uDCDA","language|语言  large|大的  last|最后的；上一个的  latest|最新的  least|最少  left-hand|左边的  lemonade|柠檬水  length|长度  less|较少的  let|让  letter|信；字母  level|水平；级别  licence|执照  lie down|躺下  life|生活；生命  lift|电梯；搭便车  line|线；排  link|链接  list|清单  litre|升  little|小的；少的  lizard|蜥蜴  look after|照顾  look at|看  look for|寻找  look out|小心  lost|丢失的；迷路的  lots / a lot|许多  loud|大声的  lovely|可爱的；美好的  luck|运气  luckily|幸运地  lunchtime|午餐时间"],
+
+["PET 补充 M","\uD83D\uDCDA","mad|疯狂的；生气的  mail|邮件  main course|主菜  make sure|确保  make-up|化妆品  mango|芒果  mark|分数；记号  married|已婚的  matter|事情；要紧  may|可能；可以  me|我  mean|意思是  mechanic|机械师  meeting|会议  melon|瓜  member|成员  memory|记忆  metal|金属  metre|米  microphone|麦克风  midday|中午  middle|中间  might|可能  mile|英里  million|百万  mind|介意  mineral water|矿泉水  minus|减去  Miss|小姐  missing|丢失的  mix|混合  model|模型；模特  mom|妈妈  monthly|每月的；每月  motorway|高速公路  movie|电影  movie star|电影明星"],
+
+["PET 补充 N","\uD83D\uDCDA","name|名字；命名  national|国家的  nationality|国籍  near|附近；接近  nearly|几乎  necessary|必要的  nephew|侄子  net|网  next|下一个  next to|在……旁边  niece|侄女  no|不；没有  noise|噪音  no one|没有人  not|不  notice|通知；注意到  now|现在  nowhere|无处  number|数字；号码"],
+
+["PET 补充 O","\uD83D\uDCDA","o'clock|……点钟  of|……的  off|离开；关闭  offer|提供；提议  officer|官员；警官  oil|油  OK|好的  olive|橄榄  on|在……上面；开启  once|一次；曾经  one|一；一个  opera|歌剧  opposite|在……对面；相反的  ordinary|普通的  other|其他的  our|我们的  ours|我们的  ourselves|我们自己  out|外面；出去  outdoor|户外的  outdoors|在户外  outside|在外面  over|在……上面；超过  own|自己的"]
+];
+
+/* 把 K-O 补充词汇合并到主词库 */
+RAW = RAW.concat(RAW_EXTRA_KO);
+/* ============================================================
+   PET 补充词汇 P-T（共 203 个词，去重后补充）
+   ============================================================ */
+var RAW_EXTRA_PT = [
+["PET 补充 P","\uD83D\uDCDA","pale|苍白的  pan|平底锅  parking lot|停车场  part|部分  partner|伙伴；搭档  party|聚会；政党  pass|通过；传递  passenger|乘客  past|经过；过去  pasta|意大利面  path|小路  PC|个人电脑  pence|便士  pencil case|铅笔盒  penfriend|笔友  penguin|企鹅  penny|便士  people|人们  per|每  perform|表演；执行  performance|表演；表现  perfume|香水  perhaps|也许  person|人  petrol|汽油  petrol station|加油站  photographer|摄影师  physics|物理学  pick up|捡起；接人  piece|一块；一片  pink|粉红色的  pity|遗憾；同情  plastic|塑料  pleasant|令人愉快的  please|请；使高兴  plus|加  p.m.|下午  point|指；点  polar bear|北极熊  police car|警车  police officer|警官  pop|流行音乐  port|港口  possible|可能的  possibly|可能地  post|邮寄；邮政  postcard|明信片  poster|海报  pound|英镑；磅  prefer|更喜欢  pretty|漂亮的  print|打印；印刷  protect|保护  pull|拉  purple|紫色的  purse|钱包  push|推"],
+
+["PET 补充 Q","\uD83D\uDCDA","queen|女王  quick|快的  quickly|快速地  quite|相当  quiz|测验"],
+
+["PET 补充 R","\uD83D\uDCDA","radio|收音机  railway|铁路  raincoat|雨衣  reader|读者  reading|阅读  real|真实的  really|真正地  receive|收到  recent|最近的  reception|接待处  recipe|食谱  recommend|推荐  record|记录；唱片  red|红色的  refuse|拒绝  region|地区  remove|移除  rent|租；租金  repair|修理  reply|回答  report|报告  request|请求  ride|骑；乘坐  ring|戒指；打电话  rock|岩石；摇滚  roll|卷；滚动  roof|屋顶  round|圆的；围绕  roundabout|环岛  rude|粗鲁的  runner|跑步者"],
+
+["PET 补充 S","\uD83D\uDCDA","sail|航行  same|相同的  sauce|酱汁  sausage|香肠  scientist|科学家  screen|屏幕  secretary|秘书  seem|似乎  sentence|句子  serve|服务；供应  service|服务  several|几个  shampoo|洗发水  shape|形状  share|分享  sharp|锋利的  shave|剃须  sheet|床单；一张  shelf|架子  shopping|购物  should|应该  side|边；侧面  similar|相似的  simple|简单的  since|自从  sink|水槽  sit down|坐下  site|地点；网站  situation|情况  skate|滑冰  skateboard|滑板  skating|滑冰  ski|滑雪  sleepy|困倦的  slowly|缓慢地  smart|聪明的；时髦的  smoke|吸烟；烟  snowy|下雪的  software|软件  some|一些  somebody|某人  someone|某人  something|某物  somewhere|某处  song|歌曲  sorry|抱歉的  sound|声音；听起来  space|空间；太空  special|特别的  spelling|拼写  spend|花费  spider|蜘蛛  stage|舞台；阶段  stamp|邮票  steak|牛排  steal|偷  stone|石头  store|商店  stranger|陌生人  studies|学业  stupid|愚蠢的  subway|地铁  succeed|成功  success|成功  successful|成功的  suggest|建议  suit|西装  supper|晚餐  sure|确信的  surf|冲浪  surprise|惊讶；使惊讶  surprised|惊讶的  swimming costume|泳衣  swimsuit|泳衣"],
+
+["PET 补充 T","\uD83D\uDCDA","take off|起飞；脱下  talk|谈话  teenager|青少年  telephone|电话；打电话  text|文本；发短信  than|比  then|然后  there|那里  these|这些  they|他们  this|这个  those|那些  though|虽然；不过  through|穿过  tights|连裤袜  till|直到  tin|罐头；锡  tissue|纸巾  to|到；向  toast|烤面包  together|一起  toilet|厕所  tongue|舌头  tonight|今晚  top|顶部；最高的  total|总的；总数  tour|旅行；参观  towards|朝；向  town|城镇  translate|翻译  try on|试穿  turn off|关闭  turn on|打开  twice|两次  typical|典型的  tyre|轮胎"]
+];
+
+/* 把 P-T 补充词汇合并到主词库 */
+RAW = RAW.concat(RAW_EXTRA_PT);
+/* ============================================================
+   PET 补充词汇 U-Z（共 72 个词，最后一批）
+   ============================================================ */
+var RAW_EXTRA_UZ = [
+["PET 补充 U","\uD83D\uDCDA","ugly|丑陋的  under|在……下面  understand|理解  underwear|内衣  unfortunately|不幸地  unhappy|不快乐的  unless|除非  until|直到  unusual|不寻常的  up|向上  upstairs|楼上  us|我们（宾格）  useful|有用的  usual|通常的"],
+
+["PET 补充 V","\uD83D\uDCDA","very|非常  view|景色；观点  violin|小提琴  visitor|游客；访客  voice|声音"],
+
+["PET 补充 W","\uD83D\uDCDA","wait|等待  washing machine|洗衣机  way|方式；路  we|我们  Wednesday|星期三  weight|重量  welcome|欢迎  well|好；健康的  wet|湿的  what|什么  wheel|轮子  when|何时  where|哪里  which|哪一个  while|当……时  white|白色的  who|谁  whole|整个的  why|为什么  wide|宽的  wild|野生的  will|将  windsurfing|风帆冲浪  winner|获胜者  wish|愿望  with|和……一起  without|没有  wonderful|精彩的  wood|木头  wool|羊毛  word|单词  worker|工人  work out|锻炼；解决  worried|担心的  worse|更差的  worst|最差的  would|将会  wow|哇  write down|写下  writer|作家  writing|写作  wrong|错误的"],
+
+["PET 补充 Y","\uD83D\uDCDA","yeah|是的  yellow|黄色的  yes|是的  yet|还；已经  yoghurt|酸奶  you|你  young|年轻的  your|你的  yours|你的  yourself|你自己"],
+
+["PET 补充 Z","\uD83D\uDCDA","zero|零"]
+];
+
+/* 把 U-Z 补充词汇合并到主词库 */
+RAW = RAW.concat(RAW_EXTRA_UZ);
 var WORDS = [];
 (function(){
   for(var ci=0; ci<RAW.length; ci++){
@@ -309,6 +403,89 @@ var WORDS = [];
       var z = p.slice(idx + 1).trim();
       if(w && z) WORDS.push({ w:w, z:z, cat:cn, emoji:em });
     }
+  }
+})();
+/* ============================================================
+   词性推断 + 难度分层（后处理）
+   ============================================================ */
+
+/* 常见功能词的精确词性 */
+var POS_MAP = {
+  'a':'art.','an':'art.','the':'art.',
+  'i':'pron.','you':'pron.','he':'pron.','she':'pron.','it':'pron.',
+  'we':'pron.','they':'pron.','us':'pron.','them':'pron.',
+  'me':'pron.','him':'pron.','her':'pron.','his':'pron.',
+  'my':'pron.','your':'pron.','our':'pron.','their':'pron.',
+  'this':'pron.','that':'pron.','these':'pron.','those':'pron.',
+  'myself':'pron.','yourself':'pron.','himself':'pron.','herself':'pron.',
+  'itself':'pron.','ourselves':'pron.','themselves':'pron.',
+  'someone':'pron.','anyone':'pron.','everyone':'pron.','nobody':'pron.',
+  'something':'pron.','anything':'pron.','everything':'pron.','nothing':'pron.',
+  'somebody':'pron.','anybody':'pron.','everybody':'pron.',
+  'and':'conj.','but':'conj.','or':'conj.','so':'conj.','if':'conj.',
+  'because':'conj.','when':'conj.','while':'conj.','although':'conj.',
+  'though':'conj.','unless':'conj.','until':'conj.','than':'conj.',
+  'whether':'conj.','since':'conj.',
+  'in':'prep.','on':'prep.','at':'prep.','by':'prep.','for':'prep.',
+  'with':'prep.','of':'prep.','to':'prep.','from':'prep.','about':'prep.',
+  'into':'prep.','through':'prep.','between':'prep.','among':'prep.',
+  'during':'prep.','without':'prep.','against':'prep.','above':'prep.',
+  'below':'prep.','under':'prep.','over':'prep.','across':'prep.',
+  'behind':'prep.','beside':'prep.','near':'prep.','around':'prep.',
+  'towards':'prep.','per':'prep.','plus':'prep.','except':'prep.',
+  'is':'v.','are':'v.','was':'v.','were':'v.','be':'v.',
+  'am':'v.','been':'v.','being':'v.',
+  'have':'v.','has':'v.','had':'v.','do':'v.','does':'v.','did':'v.',
+  'can':'modal v.','could':'modal v.','will':'modal v.','would':'modal v.',
+  'should':'modal v.','may':'modal v.','might':'modal v.','must':'modal v.',
+  'shall':'modal v.','ought':'modal v.'
+};
+
+/* 根据单词和分类推断词性 */
+function inferPos(word, cat){
+  var w = word.toLowerCase();
+  /* 1. 精确映射 */
+  if(POS_MAP[w]) return POS_MAP[w];
+  /* 2. 词组（含空格）不显示词性 */
+  if(/\s/.test(w)) return '';
+  /* 3. 后缀规律 */
+  if(/(tion|sion|ment|ness|ity|ance|ence|ship|hood|ism)$/.test(w)) return 'n.';
+  if(/ly$/.test(w) && w.length > 4){
+    /* 排除 friendly, lovely 等形容词 */
+    if(/^(friendly|lovely|lonely|silly|ugly|early|daily|monthly|weekly|yearly|likely|unlikely)$/.test(w)) return 'adj.';
+    return 'adv.';
+  }
+  if(/ous$|ful$|less$|ive$|able$|ible$/.test(w)) return 'adj.';
+  if(/ing$/.test(w) && w.length > 4){
+    if(cat.indexOf('形容') >= 0 || cat.indexOf('情感') >= 0) return 'adj.';
+    return 'v.';
+  }
+  if(/ed$/.test(w) && w.length > 3){
+    if(cat.indexOf('形容') >= 0 || cat.indexOf('情感') >= 0) return 'adj.';
+    return 'v.';
+  }
+  /* 4. 分类推断 */
+  if(cat.indexOf('动词') >= 0) return 'v.';
+  if(cat.indexOf('形容') >= 0 || cat.indexOf('情感') >= 0) return 'adj.';
+  if(cat.indexOf('连接词') >= 0) return 'conj.';
+  if(cat.indexOf('功能词') >= 0 || cat.indexOf('代词') >= 0) return 'pron.';
+  if(cat.indexOf('日期') >= 0) return 'n.';
+  /* 5. 兜底：大多数词是名词 */
+  return 'n.';
+}
+
+/* 给所有词打上难度和词性 */
+(function(){
+  for(var i=0; i<WORDS.length; i++){
+    var o = WORDS[i];
+    /* 难度：来自"PET 补充"分类的 → 扩展；其他 → 核心 */
+    if(o.cat.indexOf('PET 补充') >= 0 || o.cat.indexOf('补充') >= 0){
+      o.level = 'extra';
+    } else {
+      o.level = 'core';
+    }
+    /* 词性 */
+    if(!o.pos) o.pos = inferPos(o.w, o.cat);
   }
 })();
 var TOTAL_WORDS = WORDS.length;
@@ -1120,6 +1297,8 @@ function renderLearn(){
         '<div class="flash-inner">' +
           '<div class="flash-face flash-front">' +
             '<div class="flash-tag">' + o.emoji + ' ' + escHtml(o.cat) + '</div>' +
+            '<div class="level-tag ' + (o.level === 'extra' ? 'extra' : 'core') + '">' +
+              (o.level === 'extra' ? '扩展' : '核心') + '</div>' +
             (stageHtml ? '<div class="flash-stage">' + stageHtml + '</div>' : '') +
             '<button class="sound-btn" onclick="event.stopPropagation();KET.speakManual(\'' + escAttr(o.w) + '\')">&#x1F50A;</button>' +
             '<div class="flash-word">' + escHtml(o.w) + '</div>' +
@@ -1127,8 +1306,11 @@ function renderLearn(){
           '</div>' +
           '<div class="flash-face flash-back">' +
             '<div class="flash-tag">' + o.emoji + ' ' + escHtml(o.cat) + '</div>' +
+            '<div class="level-tag ' + (o.level === 'extra' ? 'extra' : 'core') + '">' +
+            (o.level === 'extra' ? '扩展' : '核心') + '</div>' +
             '<button class="sound-btn" onclick="event.stopPropagation();KET.speakManual(\'' + escAttr(o.w) + '\')">&#x1F50A;</button>' +
             '<div class="flash-cn">' + escHtml(o.z) + '</div>' +
+            (o.pos ? '<div class="pos-line">' + escHtml(o.pos) + '</div>' : '') +
             '<div class="flash-hint">' + (item.isReview ? '凭记忆选认识/不认识' : '再点一下翻回去') + '</div>' +
           '</div>' +
         '</div>' +
@@ -1314,7 +1496,7 @@ function updateWordList(){
       if(c.n <= now && c.s > 0){ cls = 'review'; label = '待复习'; }
     }
     html += '<div class="word-row">' +
-      '<div style="min-width:0"><div class="wr-w">' + o.emoji + ' ' + escHtml(o.w) + '</div>' +
+      '<div class="wr-w"><span class="lv-dot ' + (o.level === 'extra' ? 'extra' : 'core') + '"></span>' + o.emoji + ' ' + escHtml(o.w) + (o.pos ? ' <span class="pos-badge">' + escHtml(o.pos) + '</span>' : '') + '</div>' +
       '<div class="wr-z">' + escHtml(o.z) + stageHtml + '</div></div>' +
       '<div class="wr-right">' + masteryStars(c ? c.s : 0) +
         '<span class="badge ' + cls + '">' + label + '</span>' +

@@ -14,7 +14,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 #app{width:100%;max-width:520px;height:100vh;height:100dvh;display:flex;flex-direction:column;background:linear-gradient(180deg,#EAF6FF 0%,#FFF9EF 38%,#FFF3F8 100%);overflow:hidden;position:relative}
 .topbar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;background:linear-gradient(120deg,#7FD8F7,#9B8BF4 48%,#FF8FB1);border-radius:0 0 28px 28px;color:#fff;box-shadow:0 6px 20px rgba(155,139,244,.28);position:relative;z-index:5}
 .brand-wrap{display:flex;align-items:center;gap:10px;min-width:0}
-.avatar-btn{flex:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.30);border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;font-size:22px;cursor:pointer}
+.avatar-btn{flex:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.30);border:2px solid rgba(255,255,255,.55);display:grid;place-items:center;font-size:22px;cursor:pointer;overflow:hidden;padding:0}
+.avatar-btn img{width:100%;height:100%;object-fit:cover;display:block}
 .user-info{min-width:0}
 .user-greeting{font-size:11px;opacity:.9;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .user-name{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
@@ -55,9 +56,11 @@ h2{margin:8px 0 6px;font-size:21px;font-weight:800}
 .stat small{font-size:11px;color:var(--muted);font-weight:700}
 .week{display:flex;gap:6px;justify-content:space-between;margin-top:12px}
 .day{flex:1;text-align:center}
-.day .dot{width:100%;aspect-ratio:1;max-width:38px;margin:0 auto;border-radius:12px;background:#F3F0FC;display:grid;place-items:center;font-size:15px;color:#C9C2E0;font-weight:700}
+.day .dot{width:100%;aspect-ratio:1;max-width:38px;margin:0 auto;border-radius:12px;background:#F3F0FC;display:grid;place-items:center;font-size:15px;color:#C9C2E0;font-weight:700;position:relative}
 .day .dot.on{background:linear-gradient(140deg,#7FD8F7,#9B8BF4);color:#fff}
 .day .dot.today{outline:2.5px solid var(--pink);outline-offset:2px}
+.day .dot.multi{background:linear-gradient(140deg,#FFA8C4,#FF8FB1)}
+.day .dot .cnt{position:absolute;top:-4px;right:-4px;background:#FF8FB1;color:#fff;font-size:9px;font-weight:800;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 3px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .day small{display:block;font-size:10px;color:var(--muted);margin-top:5px;font-weight:700}
 .flash-card{perspective:1100px;height:260px;margin-bottom:18px;cursor:pointer}
 .flash-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .6s cubic-bezier(.35,.1,.25,1)}
@@ -128,18 +131,29 @@ h2{margin:8px 0 6px;font-size:21px;font-weight:800}
 #global-error button{border:0;border-radius:999px;padding:12px 26px;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(180deg,#A595F7,#7C6BF0);margin-top:14px}
 .name-modal{display:none;position:fixed;inset:0;background:rgba(30,24,54,.55);z-index:9000;align-items:center;justify-content:center;padding:20px}
 .name-modal.show{display:flex}
-.name-modal .nm-box{background:#fff;border-radius:26px;padding:26px 22px;max-width:360px;width:100%;text-align:center}
-.name-modal .nm-emoji{font-size:56px;margin-bottom:8px}
+.name-modal .nm-box{background:#fff;border-radius:26px;padding:26px 22px;max-width:360px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
+.name-modal .nm-emoji{font-size:56px;margin:0 auto 8px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;background:#F5F1FF}
+.name-modal .nm-emoji img{width:80px;height:80px;border-radius:50%;object-fit:cover;display:block}
 .name-modal h3{margin:0 0 8px;font-size:20px;font-weight:800}
 .name-modal .nm-tip{margin:0 0 18px;font-size:13px;color:var(--muted);font-weight:600}
-.name-modal input{width:100%;border:3px solid #E4DDFF;background:#FAF8FF;border-radius:16px;padding:14px;font-size:17px;font-weight:800;font-family:inherit;color:var(--text);outline:none;text-align:center;margin-bottom:14px}
+.name-modal input[type=text]{width:100%;border:3px solid #E4DDFF;background:#FAF8FF;border-radius:16px;padding:14px;font-size:17px;font-weight:800;font-family:inherit;color:var(--text);outline:none;text-align:center;margin-bottom:14px}
 .name-modal .nm-avatars{display:flex;justify-content:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .name-modal .nm-avatars button{width:46px;height:46px;border-radius:50%;border:2.5px solid #F0E9FF;background:#fff;font-size:24px;cursor:pointer;display:grid;place-items:center;padding:0}
 .name-modal .nm-avatars button.on{border-color:#9B8BF4;background:#F3EFFF;transform:scale(1.08)}
+.name-modal .nm-avatar-extra{margin-bottom:14px;display:flex;flex-direction:column;gap:8px}
+.name-modal .nm-upload{display:block;border:2.5px dashed #E4DDFF;border-radius:14px;padding:11px;font-size:14px;font-weight:800;color:#8B7CF0;cursor:pointer;background:#FAF8FF;transition:.15s}
+.name-modal .nm-upload:active{background:#F3EFFF}
+.name-modal #nmAvatarUrl{width:100%;border:2.5px solid #E4DDFF;background:#FAF8FF;border-radius:14px;padding:11px 14px;font-size:14px;font-weight:600;font-family:inherit;color:var(--text);outline:none;text-align:left;margin:0}
 .name-modal .nm-btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .name-modal .nm-btn{border:0;border-radius:999px;padding:14px;font-size:16px;font-weight:800;cursor:pointer}
 .name-modal .nm-btn.confirm{background:linear-gradient(180deg,#A595F7,#7C6BF0);color:#fff}
 .name-modal .nm-btn.cancel{background:#fff;color:#8B7CF0;border:2.5px solid #E4DDFF}
+.backup-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.backup-grid .backup-btn{margin:0;padding:14px;font-size:15px;text-align:center;cursor:pointer;border-radius:999px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit}
+.backup-grid .export-btn{background:linear-gradient(180deg,#A595F7,#7C6BF0);color:#fff;border:0;box-shadow:0 6px 0 #5F4FD1}
+.backup-grid .export-btn:active{transform:translateY(5px);box-shadow:0 1px 0 #5F4FD1}
+.backup-grid .import-btn{background:#fff;color:#8B7CF0;border:2.5px solid #E4DDFF;box-shadow:0 4px 0 #EAE3FF}
+.backup-grid .import-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #EAE3FF}
 .spell-wrap{background:#fff;border-radius:24px;padding:20px;border:3px solid #F0E9FF;margin-bottom:16px}
 .spell-title{text-align:center;font-size:15px;font-weight:800;color:var(--purple);margin-bottom:4px}
 .spell-cn{text-align:center;font-size:22px;font-weight:900;color:#3A3357;margin:8px 0 6px}
@@ -239,6 +253,13 @@ h2{margin:8px 0 6px;font-size:21px;font-weight:800}
     <h3 id="nmTitle">欢迎来到 KET 单词乐园！</h3>
     <p class="nm-tip" id="nmTip">给自己起一个名字吧～</p>
     <div class="nm-avatars" id="nmAvatars"></div>
+    <div class="nm-avatar-extra">
+      <label class="nm-upload">
+        📷 上传本地图片作为头像
+        <input type="file" id="nmAvatarFile" accept="image/*" style="display:none" onchange="KET.handleAvatarUpload(this)">
+      </label>
+      <input type="text" id="nmAvatarUrl" placeholder="或粘贴图片链接 https://..." onchange="KET.onAvatarUrlInput(this.value)">
+    </div>
     <input type="text" id="nmInput" maxlength="12" placeholder="输入名字（最多12字）">
     <div class="nm-btn-row">
       <button class="nm-btn cancel" id="nmCancelBtn" onclick="KET.closeNameModal()">取消</button>
@@ -425,17 +446,16 @@ var TOTAL_WORDS = WORDS.length;
    ========================================================= */
 var CLOUD = {
   binId: '6ab63c96ffd5d160532d5b62',
-  apiKey: '$2a$10$L3BHo8TRvobtbrirN9sLzOosw9kvEEDJNT9z7B7hvmXr7ULursR9.',
+  apiKey: '$2a$10$VTHBGSARIANASY4YCgSNqOLqnT3r90YlEgTySZZuvCivOddgHrlZa',
   url: 'https://api.jsonbin.io/v3/b/',
   status: 'idle',
   lastSync: 0,
-  lastCloudAt: 0,   // 云端数据的 updatedAt
+  lastCloudAt: 0,
   pushTimer: null,
   pulling: false,
   pushing: false
 };
 
-/* 本地时间戳存储 */
 var META_KEY = 'ket_words_v7_meta';
 var S_UPDATED_AT = 0;
 try {
@@ -497,14 +517,13 @@ function cloudPull(callback){
     CLOUD.status = 'ok';
     CLOUD.lastSync = Date.now();
     updateSyncBadge();
-    // 支持两种格式：新格式 { state, updatedAt } 和旧格式 直接是数据
     var state = null, updatedAt = 0;
     if(data && data.state && typeof data.state === 'object'){
       state = data.state;
       updatedAt = Number(data.updatedAt) || 0;
     } else if(data && typeof data === 'object' && !data.state){
       state = data;
-      updatedAt = 0;   // 老格式没时间戳
+      updatedAt = 0;
     }
     CLOUD.lastCloudAt = updatedAt;
     if(callback) callback(null, state, updatedAt);
@@ -575,7 +594,6 @@ function schedulePush(){
   }, 1200);
 }
 
-/* 启动时同步：核心是比对时间戳，谁新用谁 */
 function cloudInit(){
   cloudPull(function(err, remote, remoteAt){
     if(err){
@@ -590,7 +608,6 @@ function cloudInit(){
     var localAt = S_UPDATED_AT || 0;
     var cloudAt = remoteAt || 0;
 
-    // 判断云端是否有实际数据
     var hasRemoteData = remote && (
       (remote.cards && Object.keys(remote.cards).length > 0) ||
       (remote.checkinsList && remote.checkinsList.length > 0)
@@ -598,7 +615,6 @@ function cloudInit(){
     var hasLocalData = (S.cards && Object.keys(S.cards).length > 0) ||
                        (S.checkinsList && S.checkinsList.length > 0);
 
-    // 云端无数据 → 用本地初始化云端
     if(!hasRemoteData){
       if(hasLocalData){
         S_UPDATED_AT = Date.now();
@@ -610,7 +626,6 @@ function cloudInit(){
       return;
     }
 
-    // 云端有数据，本地为空 → 直接采用云端
     if(!hasLocalData){
       S = normalizeState(remote);
       S_UPDATED_AT = cloudAt || Date.now();
@@ -621,9 +636,7 @@ function cloudInit(){
       return;
     }
 
-    // 两边都有数据 → 比较时间戳
     if(cloudAt > localAt){
-      // 云端更新，用云端
       console.log('[KET] 云端更新：', new Date(cloudAt).toLocaleString(), '本地：', new Date(localAt).toLocaleString());
       S = normalizeState(remote);
       S_UPDATED_AT = cloudAt;
@@ -632,14 +645,12 @@ function cloudInit(){
       toast('☁️ 已采用云端最新进度');
       render(true);
     } else if(localAt > cloudAt){
-      // 本地更新，推到云端
       console.log('[KET] 本地更新：', new Date(localAt).toLocaleString(), '云端：', new Date(cloudAt).toLocaleString());
       cloudPush(S, localAt, function(){
         toast('☁️ 已上传本机最新进度');
       });
       render(true);
     } else {
-      // 时间戳相同（或都是 0）→ 走合并策略（兼容旧数据）
       S = mergeState(remote, S);
       S_UPDATED_AT = Date.now();
       try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){}
@@ -650,23 +661,30 @@ function cloudInit(){
   });
 }
 
-/* 保证 state 结构完整 */
 function normalizeState(remote){
   var base = blankState();
   if(!remote || typeof remote !== 'object') return base;
   if(remote.cards) base.cards = remote.cards;
   if(remote.history) base.history = remote.history;
   if(remote.checkinsList) base.checkinsList = remote.checkinsList;
+  if(remote.checkinsCount) base.checkinsCount = remote.checkinsCount;
   if(remote.settings) base.settings = Object.assign(base.settings, remote.settings);
   if(remote.spellMastered) base.spellMastered = remote.spellMastered;
   return base;
 }
 
 function mergeState(remote, local){
+  /* 合并 checkinsCount：取每个日期两边的最大值 */
+  var cc = {};
+  var a = (local.checkinsCount) || {};
+  var b = (remote.checkinsCount) || {};
+  Object.keys(a).forEach(function(k){ cc[k] = a[k]; });
+  Object.keys(b).forEach(function(k){ cc[k] = Math.max(cc[k] || 0, b[k]); });
   return {
     cards: Object.assign({}, local.cards || {}, remote.cards || {}),
     history: Object.assign({}, local.history || {}, remote.history || {}),
     checkinsList: Array.from(new Set([].concat(local.checkinsList || [], remote.checkinsList || []))).sort(),
+    checkinsCount: cc,
     settings: Object.assign({}, local.settings || {}, remote.settings || {}),
     spellMastered: Object.assign({}, local.spellMastered || {}, remote.spellMastered || {})
   };
@@ -687,7 +705,8 @@ function blankState(){
     cards:{},
     history:{},
     checkinsList:[],
-    settings:{ dailyNew:10, autoSpeak:true, voiceChannel:'auto' },
+    checkinsCount:{},
+    settings:{ dailyNew:25, autoSpeak:true, voiceChannel:'auto' },
     spellMastered:{}
   };
 }
@@ -700,6 +719,7 @@ try {
       if(parsed.cards) S.cards = parsed.cards;
       if(parsed.history) S.history = parsed.history;
       if(parsed.checkinsList) S.checkinsList = parsed.checkinsList;
+      if(parsed.checkinsCount) S.checkinsCount = parsed.checkinsCount;
       if(parsed.settings){
         if(typeof parsed.settings.dailyNew === 'number') S.settings.dailyNew = parsed.settings.dailyNew;
         if(typeof parsed.settings.autoSpeak === 'boolean') S.settings.autoSpeak = parsed.settings.autoSpeak;
@@ -718,7 +738,7 @@ function save(){
 }
 
 /* =========================================================
-   四、用户名
+   四、用户名 + 头像
    ========================================================= */
 var PROFILE_KEY = 'ket_profile_v2';
 var DEFAULT_NAME = 'KET 小勇士';
@@ -738,22 +758,56 @@ try {
 } catch(e){}
 function saveProfile(){ try { localStorage.setItem(PROFILE_KEY, JSON.stringify(PROFILE)); } catch(e){} }
 
+function isImageAvatar(av){
+  if(!av) return false;
+  return av.indexOf('data:') === 0 || av.indexOf('http://') === 0 || av.indexOf('https://') === 0;
+}
+function avatarDisplayHtml(av, size){
+  if(!av) av = DEFAULT_AVATAR;
+  if(isImageAvatar(av)){
+    return '<img src="' + escAttr(av) + '" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;object-fit:cover;display:block" alt="">';
+  }
+  return '<span>' + escHtml(av) + '</span>';
+}
+
 var nameModalEl, nmInputEl, nmSelectedAvatar = DEFAULT_AVATAR, nameModalMode = 'create';
 function openNameModal(mode){
   nameModalMode = mode || 'edit';
   nmSelectedAvatar = PROFILE.avatar || DEFAULT_AVATAR;
   if(!nameModalEl){ nameModalEl = document.getElementById('nameModal'); nmInputEl = document.getElementById('nmInput'); }
   if(!nameModalEl || !nmInputEl) return;
-  document.getElementById('nmTitle').textContent = (nameModalMode === 'create') ? '欢迎来到 KET 单词乐园！' : '修改你的名字';
+  document.getElementById('nmTitle').textContent = (nameModalMode === 'create') ? '欢迎来到 KET 单词乐园！' : '修改你的名字和头像';
   document.getElementById('nmTip').textContent = (nameModalMode === 'create') ? '给自己起一个名字吧～' : '换一个更喜欢的名字或头像吧～';
-  document.getElementById('nmEmoji').textContent = nmSelectedAvatar;
+  setAvatarPreview(nmSelectedAvatar);
   document.getElementById('nmCancelBtn').style.display = (nameModalMode === 'create') ? 'none' : '';
   renderAvatarOptions();
+  var urlInput = document.getElementById('nmAvatarUrl');
+  if(urlInput){
+    if(nmSelectedAvatar && nmSelectedAvatar.indexOf('http') === 0){
+      urlInput.value = nmSelectedAvatar;
+    } else {
+      urlInput.value = '';
+    }
+  }
+  var fileInput = document.getElementById('nmAvatarFile');
+  if(fileInput) fileInput.value = '';
+
   nmInputEl.value = (nameModalMode === 'create') ? '' : (PROFILE.name || '');
   nameModalEl.classList.add('show');
   setTimeout(function(){ try { nmInputEl.focus(); } catch(e){} }, 120);
 }
 function closeNameModal(){ if(nameModalEl) nameModalEl.classList.remove('show'); }
+
+function setAvatarPreview(av){
+  var el = document.getElementById('nmEmoji');
+  if(!el) return;
+  if(isImageAvatar(av)){
+    el.innerHTML = '<img src="' + escAttr(av) + '" alt="">';
+  } else {
+    el.textContent = av || DEFAULT_AVATAR;
+  }
+}
+
 function renderAvatarOptions(){
   var wrap = document.getElementById('nmAvatars');
   var html = '';
@@ -767,7 +821,9 @@ function renderAvatarOptions(){
     (function(b){
       b.addEventListener('click', function(){
         nmSelectedAvatar = b.getAttribute('data-av');
-        document.getElementById('nmEmoji').textContent = nmSelectedAvatar;
+        setAvatarPreview(nmSelectedAvatar);
+        var urlInput = document.getElementById('nmAvatarUrl');
+        if(urlInput) urlInput.value = '';
         var all = wrap.querySelectorAll('button');
         for(var k=0; k<all.length; k++) all[k].classList.remove('on');
         b.classList.add('on');
@@ -775,21 +831,87 @@ function renderAvatarOptions(){
     })(btns[j]);
   }
 }
+
+function handleAvatarUpload(input){
+  var file = input.files && input.files[0];
+  if(!file) return;
+  if(file.size > 8 * 1024 * 1024){
+    toast('图片太大，请选 8MB 以下的图片');
+    input.value = '';
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = new Image();
+    img.onload = function(){
+      try {
+        var size = 200;
+        var canvas = document.createElement('canvas');
+        canvas.width = size; canvas.height = size;
+        var ctx = canvas.getContext('2d');
+        var minSide = Math.min(img.width, img.height);
+        var sx = (img.width - minSide) / 2;
+        var sy = (img.height - minSide) / 2;
+        ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+        var data = canvas.toDataURL('image/jpeg', 0.85);
+        nmSelectedAvatar = data;
+        setAvatarPreview(data);
+        var urlInput = document.getElementById('nmAvatarUrl');
+        if(urlInput) urlInput.value = '';
+        var wrap = document.getElementById('nmAvatars');
+        if(wrap){
+          var all = wrap.querySelectorAll('button');
+          for(var k=0; k<all.length; k++) all[k].classList.remove('on');
+        }
+        toast('✅ 图片已加载到预览');
+      } catch(err){
+        toast('图片处理失败，请换一张试试');
+      }
+    };
+    img.onerror = function(){ toast('图片读取失败'); };
+    img.src = e.target.result;
+  };
+  reader.onerror = function(){ toast('文件读取失败'); };
+  reader.readAsDataURL(file);
+}
+
+function onAvatarUrlInput(val){
+  val = (val || '').trim();
+  if(!val){ return; }
+  nmSelectedAvatar = val;
+  setAvatarPreview(val);
+  var wrap = document.getElementById('nmAvatars');
+  if(wrap){
+    var all = wrap.querySelectorAll('button');
+    for(var k=0; k<all.length; k++) all[k].classList.remove('on');
+  }
+}
+
 function confirmName(){
   if(!nmInputEl) nmInputEl = document.getElementById('nmInput');
   var val = (nmInputEl.value || '').trim();
   if(!val){ toast('名字不能为空哦～'); return; }
   if(val.length > 12) val = val.slice(0, 12);
-  PROFILE.name = val; PROFILE.avatar = nmSelectedAvatar || DEFAULT_AVATAR; PROFILE.created = true;
+  PROFILE.name = val;
+  PROFILE.avatar = nmSelectedAvatar || DEFAULT_AVATAR;
+  PROFILE.created = true;
   saveProfile(); closeNameModal(); updateUserDisplay(); render(true);
-  toast(nameModalMode === 'create' ? ('欢迎你，' + PROFILE.name + '！') : '名字已更新～');
+  toast(nameModalMode === 'create' ? ('欢迎你，' + PROFILE.name + '！') : '资料已更新～');
 }
+
 function updateUserDisplay(){
   var nameEl = document.getElementById('userNameDisplay');
   var avatarEl = document.getElementById('avatarEmoji');
   var greetingEl = document.getElementById('userGreeting');
   if(nameEl) nameEl.textContent = PROFILE.name;
-  if(avatarEl) avatarEl.textContent = PROFILE.avatar || DEFAULT_AVATAR;
+  if(avatarEl){
+    var av = PROFILE.avatar || DEFAULT_AVATAR;
+    if(isImageAvatar(av)){
+      avatarEl.innerHTML = '<img src="' + escAttr(av) + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block" alt="">';
+    } else {
+      avatarEl.textContent = av;
+    }
+  }
   if(greetingEl){
     var h = new Date().getHours(), g;
     if(h < 6) g = '夜深了'; else if(h < 11) g = '早上好'; else if(h < 14) g = '中午好';
@@ -830,6 +952,10 @@ function masteredCount(){
 }
 function checkinCount(){ return (S.checkinsList && S.checkinsList.length) || 0; }
 function hasCheckin(t){ return S.checkinsList.indexOf(t) !== -1; }
+function getDayCheckinCount(t){
+  if(!S.checkinsCount) return hasCheckin(t) ? 1 : 0;
+  return S.checkinsCount[t] || 0;
+}
 function calcStreak(){
   var set = {};
   for(var i=0; i<S.checkinsList.length; i++) set[S.checkinsList[i]] = 1;
@@ -838,14 +964,19 @@ function calcStreak(){
   while(set[dstr(d)]){ n++; d.setDate(d.getDate() - 1); }
   return n;
 }
+/* 单日多次打卡：每完成一轮（新词达标 + 无待复习）记录一次打卡，同一天可累积多次 */
 function checkToday(){
   var h = hist();
   var due = dueCards().length;
   if(h['new'] >= S.settings.dailyNew && due === 0){
     var t = today();
+    if(!S.checkinsCount) S.checkinsCount = {};
+    S.checkinsCount[t] = (S.checkinsCount[t] || 0) + 1;
     if(S.checkinsList.indexOf(t) === -1){
-      S.checkinsList.push(t); S.checkinsList.sort(); save(); return true;
+      S.checkinsList.push(t); S.checkinsList.sort();
     }
+    save();
+    return true;
   }
   return false;
 }
@@ -1080,9 +1211,14 @@ function renderHome(){
   var week = ['日','一','二','三','四','五','六'];
   for(var k=6; k>=0; k--){
     var d = new Date(); d.setDate(d.getDate() - k);
-    var ds = dstr(d), on = hasCheckin(ds), isT = (k === 0);
-    daysHtml += '<div class="day"><div class="dot ' + (on?'on':'') + ' ' + (isT?'today':'') + '">' +
-      (on ? '&#x2713;' : '') + '</div><small>' + week[d.getDay()] + '</small></div>';
+    var ds = dstr(d), cnt = getDayCheckinCount(ds), isT = (k === 0);
+    var dotCls = 'dot';
+    if(cnt > 0) dotCls += ' on';
+    if(cnt > 1) dotCls += ' multi';
+    if(isT) dotCls += ' today';
+    var inner = cnt > 0 ? '&#x2713;' : '';
+    var cntBadge = cnt > 1 ? '<span class="cnt">' + cnt + '</span>' : '';
+    daysHtml += '<div class="day"><div class="' + dotCls + '">' + inner + cntBadge + '</div><small>' + week[d.getDay()] + '</small></div>';
   }
 
   var forecast = forecastDays(7);
@@ -1109,6 +1245,11 @@ function renderHome(){
   else if(newLeft > 0) mainBtn = '<button class="btn" onclick="KET.startNew()">学习 ' + newLeft + ' 个新词</button>';
   else mainBtn = '<button class="btn" onclick="KET.startSession()">继续学习</button>';
 
+  var todayCnt = getDayCheckinCount(today());
+  var todayTip = todayCnt > 0
+    ? '<p class="muted small" style="text-align:center;margin:10px 0 0">今日已打卡 <b style="color:#FF8FB1">' + todayCnt + '</b> 次</p>'
+    : '';
+
   return '' +
     '<div class="hero">' +
       '<div class="hero-row">' +
@@ -1121,6 +1262,7 @@ function renderHome(){
         '<div><b>' + h['new'] + ' / ' + daily + '</b><small>今日新词</small></div>' +
         '<div><b>' + dueCount + '</b><small>待复习</small></div>' +
       '</div>' +
+      todayTip +
     '</div>' +
     alertHtml +
     mainBtn + continueBtn +
@@ -1382,11 +1524,14 @@ function renderLearnEnd(){
   var s = session.stats;
   var checked = session.checked;
   var counted = Object.keys(session.counted).length;
+  var todayCnt = getDayCheckinCount(today());
   return '' +
     '<div class="card center">' +
       '<div class="big-emoji">' + (checked ? '&#x1F389;' : '&#x2705;') + '</div>' +
       '<h2>' + (checked ? '打卡成功！' : '本轮学习完成') + '</h2>' +
-      '<p class="muted">' + (checked ? escHtml(PROFILE.name) + '，连续打卡 ' + calcStreak() + ' 天，你太棒啦！' : '继续保持，随时回来复习～') + '</p>' +
+      '<p class="muted">' + (checked
+        ? escHtml(PROFILE.name) + '，连续打卡 ' + calcStreak() + ' 天！今日第 <b style="color:#FF8FB1">' + todayCnt + '</b> 次打卡～'
+        : '继续保持，随时回来复习～') + '</p>' +
       '<div class="result-grid">' +
         '<div><b>' + s.reviewKnow + '</b><small>复习会</small></div>' +
         '<div><b>' + s.reviewNo + '</b><small>复习忘</small></div>' +
@@ -1529,7 +1674,8 @@ function renderMe(){
   var learned = learnedCount();
   var mastered = masteredCount();
   var learning = learned - mastered;
-  var opts = [5, 10, 15, 20];
+  /* 每日新词选项：25 或 50 */
+  var opts = [25, 50];
   var segHtml = '';
   for(var i=0; i<opts.length; i++){
     var n = opts[i];
@@ -1540,14 +1686,19 @@ function renderMe(){
   var stageRows = '';
   for(var si=1; si<=7; si++) stageRows += '<div class="row"><span>' + stagePill(si) + ' ' + STAGE_LABELS[si] + '</span><b>' + stageDist[si] + ' 个</b></div>';
   var vc = S.settings.voiceChannel || 'auto';
+  var avatarHtml = avatarDisplayHtml(PROFILE.avatar, 80);
+  var todayCnt = getDayCheckinCount(today());
+  var totalCheckinTimes = 0;
+  for(var dk in (S.checkinsCount || {})) totalCheckinTimes += S.checkinsCount[dk] || 0;
   return '' +
     '<div class="card center" style="padding-bottom:14px">' +
-      '<div style="font-size:52px;margin-bottom:6px">' + escHtml(PROFILE.avatar || DEFAULT_AVATAR) + '</div>' +
+      '<div style="width:80px;height:80px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:56px;border-radius:50%;overflow:hidden;background:#F5F1FF">' + avatarHtml + '</div>' +
       '<div style="font-size:22px;font-weight:800;margin-bottom:2px">' + escHtml(PROFILE.name) + '</div>' +
       '<p class="muted small" style="margin:4px 0 14px">这是我的 KET 学习档案</p>' +
       '<button class="btn small" style="max-width:200px;margin:0 auto" onclick="KET.openNameModal()">修改名字和头像</button>' +
     '</div>' +
-    '<div class="card"><b style="font-size:15px">每天学几个新词？</b><div class="seg">' + segHtml + '</div></div>' +
+    '<div class="card"><b style="font-size:15px">每天学几个新词？</b><p class="muted small" style="margin:6px 0 0">可选 25 或 50 个。一天内可分多轮学习，每完成一轮算一次打卡</p>' +
+      '<div class="seg">' + segHtml + '</div></div>' +
     '<div class="card"><b style="font-size:15px">自动朗读</b><p class="muted small" style="margin:6px 0 0">出现新单词时自动读一遍</p>' +
       '<div class="seg">' +
         '<button class="' + (S.settings.autoSpeak ? 'on' : '') + '" onclick="KET.setSpeak(true)">打开</button>' +
@@ -1561,12 +1712,23 @@ function renderMe(){
       '</div></div>' +
     '<div class="card"><b style="font-size:15px">☁️ 云同步</b><p class="muted small" style="margin:6px 0 12px">两台手机打开同一个网址，数据自动同步。已启用时间戳比对，谁新用谁。</p>' +
       '<button class="btn small" onclick="KET.forceSync()">🔄 立即同步</button></div>' +
+    '<div class="card"><b style="font-size:15px">📦 数据备份</b>' +
+      '<p class="muted small" style="margin:6px 0 12px">导出打卡记录、学习进度和头像到 JSON 文件；换设备或重装时用导入恢复。</p>' +
+      '<div class="backup-grid">' +
+        '<button class="backup-btn export-btn" onclick="KET.exportData()">📤 导出备份</button>' +
+        '<label class="backup-btn import-btn">📥 导入备份' +
+          '<input type="file" accept=".json,application/json" style="display:none" onchange="KET.handleImport(this)">' +
+        '</label>' +
+      '</div>' +
+    '</div>' +
     '<div class="card"><b style="font-size:15px">我的成绩单</b>' +
       '<div class="row"><span>词库总量</span><b>' + TOTAL_WORDS + ' 个</b></div>' +
       '<div class="row"><span>已学单词</span><b>' + learned + ' 个</b></div>' +
       '<div class="row"><span>已掌握</span><b>' + mastered + ' 个</b></div>' +
       '<div class="row"><span>学习中</span><b>' + learning + ' 个</b></div>' +
-      '<div class="row"><span>累计打卡</span><b>' + checkinCount() + ' 天</b></div>' +
+      '<div class="row"><span>今日打卡次数</span><b style="color:#FF8FB1">' + todayCnt + ' 次</b></div>' +
+      '<div class="row"><span>累计打卡（天）</span><b>' + checkinCount() + ' 天</b></div>' +
+      '<div class="row"><span>累计打卡（次）</span><b>' + totalCheckinTimes + ' 次</b></div>' +
       '<div class="row"><span>连续打卡</span><b>' + calcStreak() + ' 天</b></div>' +
     '</div>' +
     '<div class="card"><b style="font-size:15px">&#x1F4CA; 艾宾浩斯阶段分布</b>' + stageRows + '</div>' +
@@ -1630,6 +1792,110 @@ function showSyncInfo(){
 function closeSyncInfo(){ var m = document.getElementById('syncModal'); if(m) m.classList.remove('show'); }
 
 /* =========================================================
+   十四-2、导出 / 导入
+   ========================================================= */
+function exportData(){
+  try {
+    var payload = {
+      _meta: {
+        app: 'KET 单词乐园',
+        version: 'v7',
+        exportAt: new Date().toISOString()
+      },
+      state: S,
+      updatedAt: S_UPDATED_AT,
+      profile: PROFILE
+    };
+    var json = JSON.stringify(payload, null, 2);
+    var blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var t = new Date();
+    var fn = 'KET备份_' + t.getFullYear() + pad(t.getMonth()+1) + pad(t.getDate()) + '_' + pad(t.getHours()) + pad(t.getMinutes()) + '.json';
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = fn;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+    toast('✅ 已导出备份：' + fn);
+  } catch(e){
+    console.error('导出失败：', e);
+    toast('导出失败，请重试');
+  }
+}
+
+function handleImport(input){
+  var file = input.files && input.files[0];
+  if(!file){ return; }
+  if(file.size > 20 * 1024 * 1024){
+    toast('文件过大（超过 20MB）');
+    input.value = '';
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var parsed;
+    try {
+      parsed = JSON.parse(e.target.result);
+    } catch(err){
+      toast('文件解析失败：不是有效的 JSON');
+      input.value = '';
+      return;
+    }
+    var importedState = null;
+    var importedProfile = null;
+    if(parsed && typeof parsed === 'object'){
+      if(parsed.state && typeof parsed.state === 'object'){
+        importedState = parsed.state;
+        importedProfile = parsed.profile || null;
+      } else if(parsed.cards || parsed.checkinsList){
+        importedState = parsed;
+      }
+    }
+    if(!importedState){
+      toast('备份文件内容无效，缺少学习数据');
+      input.value = '';
+      return;
+    }
+    var cardCount = importedState.cards ? Object.keys(importedState.cards).length : 0;
+    var checkinCount2 = importedState.checkinsList ? importedState.checkinsList.length : 0;
+    if(!window.confirm('即将导入备份：\n· 已学单词 ' + cardCount + ' 个\n· 累计打卡 ' + checkinCount2 + ' 天\n\n导入将【覆盖】当前所有数据（本地和云端），确定继续？')){
+      input.value = '';
+      return;
+    }
+    if(!window.confirm('再确认一次：确定要导入并覆盖吗？此操作无法撤销。')){
+      input.value = '';
+      return;
+    }
+    S = normalizeState(importedState);
+    S_UPDATED_AT = Date.now();
+    if(importedProfile && typeof importedProfile === 'object'){
+      if(importedProfile.name) PROFILE.name = String(importedProfile.name).slice(0, 12);
+      if(importedProfile.avatar) PROFILE.avatar = importedProfile.avatar;
+      PROFILE.created = true;
+      saveProfile();
+    }
+    try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){}
+    saveMeta();
+    session = null;
+    quiz = null;
+    updateUserDisplay();
+    render(true);
+    cloudPush(S, S_UPDATED_AT, function(err){
+      if(err) toast('导入成功（云端同步失败，可稍后手动同步）');
+      else toast('✅ 导入成功，已同步到云端');
+    });
+    input.value = '';
+  };
+  reader.onerror = function(){
+    toast('文件读取失败');
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+/* =========================================================
    十五、路由
    ========================================================= */
 var VIEWS = { home:renderHome, learn:renderLearn, quiz:renderQuiz, words:renderWords, me:renderMe };
@@ -1673,7 +1939,9 @@ window.KET = {
   onSearch:onSearch, setDaily:setDaily, setSpeak:setSpeak, setVoiceChannel:setVoiceChannel,
   resetAll:resetAll, speakManual:speakManual,
   openNameModal:openNameModal, closeNameModal:closeNameModal, confirmName:confirmName,
-  forceSync:forceSync, showSyncInfo:showSyncInfo, closeSyncInfo:closeSyncInfo
+  forceSync:forceSync, showSyncInfo:showSyncInfo, closeSyncInfo:closeSyncInfo,
+  handleAvatarUpload:handleAvatarUpload, onAvatarUrlInput:onAvatarUrlInput,
+  exportData:exportData, handleImport:handleImport
 };
 
 /* =========================================================
